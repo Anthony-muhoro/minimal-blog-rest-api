@@ -127,7 +127,7 @@ export const userPosts = async (req, res) => {
 // };
 
 
-export const usersPosts = async (req,res) => {
+export const usersPosts = async (_req,res) => {
     try {
         const posts = await prisma.post.findMany({
             where:{isDeleted:false},
@@ -135,12 +135,12 @@ export const usersPosts = async (req,res) => {
                 author:true
             }
         })
-        if(!posts){
-            return res.status(404).json({
-                message:"No post created yet"
-            })
-
-        }
+        if (!posts || posts.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No posts yet created"
+      });
+    }
         return res.status(200).json({
             success:true,
             data:posts

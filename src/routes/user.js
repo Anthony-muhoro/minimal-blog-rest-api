@@ -3,8 +3,8 @@ import { addUser ,getUsers,getUser} from "../controllers/user.js";
 
 const router = Router();
 
-router.post('/user',addUser);
+router.post('/users',addUser);
 router.get('/users',getUsers);
-router.get('/user/:id',getUser)
+router.get('/users/:id',getUser)
 
 export default router;

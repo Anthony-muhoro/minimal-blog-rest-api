@@ -6,17 +6,21 @@ const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 5500;
-
-app.use('/api',userRoutes);
-app.use('/api',postRoutes);
-async function startServer() {
+app.get('/',(_req,res)=>{
+ return res.send(`<h1 style="text-align:center;color:blue; text-transform:capitalize; font-size:50px;">Blog post API IS LiVe</h1>`)
+});
+app.use('/',userRoutes);
+app.use('/',postRoutes);
+async function startServer(_req,res) {
   try {
     
     await prisma.$connect();
     console.log("Database connected successfully");
   }
   catch(e){
-    console.log("Failed to connect to the database",e);
+    console.log("Failed to connect to the database");
+      console.log("Something went Wrong . Please try Again !")
+       process.exit(1);
 
   }
 
