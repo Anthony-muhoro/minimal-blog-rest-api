@@ -11,18 +11,18 @@ app.get('/',(_req,res)=>{
 });
 app.use('/',userRoutes);
 app.use('/',postRoutes);
-async function startServer(_req,res) {
-  try {
+async function startServer() {
+  // try {
     
-    await prisma.$connect();
-    console.log("Database connected successfully");
-  }
-  catch(e){
-    console.log("Failed to connect to the database");
-      console.log("Something went Wrong . Please try Again !")
-       process.exit(1);
+  //   await prisma.$connect();
+  //   console.log("Database connected successfully");
+  // }
+  // catch(e){
+  //   console.log("Failed to connect to the database");
+  //     console.log("Something went Wrong . Please try Again !")
+  //      process.exit(1);
 
-  }
+  // }
 
 
   

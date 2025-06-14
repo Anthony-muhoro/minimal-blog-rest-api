@@ -34,6 +34,7 @@ export const addPost = async (req, res) => {
 
     return res.status(201).json({
       success: true,
+      message:"Post created Successfully",
       data: post
     });
 
@@ -87,44 +88,32 @@ export const userPosts = async (req, res) => {
     });
   }
 };
-// export const userPost = async (req, res) => {
-//   try {
-//     const { authorId } = req.params;
+export const userPost = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-//     const user = await prisma.user.findUnique({
-//       where: { id: authorId },
-//     });
+    const post = await prisma.post.findFirst({
+      where: {
+        id, isDeleted: false
+      },
+      include: {
+        author: true,
+      },
+    });
 
-//     if (!user) {
-//       return res.status(404).json({
-//         success: false,
-//         message: "Author not found",
-//       });
-//     }
+    return res.status(200).json({
+      success: true,
+       data:post,
+    });
 
-//     const posts = await prisma.post.findMany({
-//       where: {
-//         authorId,
-//         isDeleted: false
-//       },
-//       include: {
-//         author: true,
-//       },
-//     });
-
-//     return res.status(200).json({
-//       success: true,
-//        data:posts,
-//     });
-
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Something went wrong",
-//     });
-//   }
-// };
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
 
 
 export const usersPosts = async (_req,res) => {
