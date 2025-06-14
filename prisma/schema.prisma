@@ -12,6 +12,7 @@ model User {
   firstName   String
   lastName    String
   emailAdress String  @unique
+  userName    String  @unique
   posts       Post[] 
 }
 
